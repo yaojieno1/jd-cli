@@ -30,4 +30,6 @@ public interface DecompilerOptions {
     boolean isEscapeUnicodeCharacters();
 
     boolean isParallelProcessingAllowed();
+
+    boolean isDecompileInnerJar();
 }

@@ -20,6 +20,12 @@ import static com.github.kwart.jd.JavaDecompilerConstants.CLASS_SUFFIX;
 import static com.github.kwart.jd.JavaDecompilerConstants.CLASS_SUFFIX_LEN;
 import static com.github.kwart.jd.JavaDecompilerConstants.JAR_SUFFIX;
 import static com.github.kwart.jd.JavaDecompilerConstants.JAR_SUFFIX_LEN;
+import static com.github.kwart.jd.JavaDecompilerConstants.ZIP_SUFFIX;
+import static com.github.kwart.jd.JavaDecompilerConstants.ZIP_SUFFIX_LEN;
+import static com.github.kwart.jd.JavaDecompilerConstants.WAR_SUFFIX;
+import static com.github.kwart.jd.JavaDecompilerConstants.WAR_SUFFIX_LEN;
+import static com.github.kwart.jd.JavaDecompilerConstants.EAR_SUFFIX;
+import static com.github.kwart.jd.JavaDecompilerConstants.EAR_SUFFIX_LEN;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -124,6 +130,48 @@ public final class IOUtils {
     }
 
     /**
+     * Returns true if given file path ends with ".zip"
+     *
+     * @param filePath
+     * @return
+     */
+    /**
+     * @param filePath
+     * @return
+     */
+    public static boolean isZipFile(final String filePath) {
+        return filePath.toLowerCase(Locale.ENGLISH).endsWith(ZIP_SUFFIX);
+    }
+
+    /**
+     * Returns true if given file path ends with ".war"
+     *
+     * @param filePath
+     * @return
+     */
+    /**
+     * @param filePath
+     * @return
+     */
+    public static boolean isWarFile(final String filePath) {
+        return filePath.toLowerCase(Locale.ENGLISH).endsWith(WAR_SUFFIX);
+    }
+
+    /**
+     * Returns true if given file path ends with ".ear"
+     *
+     * @param filePath
+     * @return
+     */
+    /**
+     * @param filePath
+     * @return
+     */
+    public static boolean isEarFile(final String filePath) {
+        return filePath.toLowerCase(Locale.ENGLISH).endsWith(EAR_SUFFIX);
+    }
+
+    /**
      * Returns true if given file path ends with ".class" and it contains "$" in the name.
      *
      * @param filePath
@@ -142,6 +190,7 @@ public final class IOUtils {
     public static String cutClassSuffix(final String classFilePath) {
         return classFilePath.substring(0, classFilePath.length() - CLASS_SUFFIX_LEN);
     }
+
     /**
      * Removes ".jar".length() number of character from the end of the input stream.
      *
@@ -150,5 +199,35 @@ public final class IOUtils {
      */
     public static String cutJarSuffix(final String jarFilePath) {
         return jarFilePath.substring(0, jarFilePath.length() - JAR_SUFFIX_LEN);
+    }
+
+    /**
+     * Removes ".zip".length() number of character from the end of the input stream.
+     *
+     * @param jarFilePath
+     * @return
+     */
+    public static String cutZipSuffix(final String jarFilePath) {
+        return jarFilePath.substring(0, jarFilePath.length() - ZIP_SUFFIX_LEN);
+    }
+
+    /**
+     * Removes ".war".length() number of character from the end of the input stream.
+     *
+     * @param jarFilePath
+     * @return
+     */
+    public static String cutWarSuffix(final String jarFilePath) {
+        return jarFilePath.substring(0, jarFilePath.length() - WAR_SUFFIX_LEN);
+    }
+
+    /**
+     * Removes ".ear".length() number of character from the end of the input stream.
+     *
+     * @param jarFilePath
+     * @return
+     */
+    public static String cutEarSuffix(final String jarFilePath) {
+        return jarFilePath.substring(0, jarFilePath.length() - EAR_SUFFIX_LEN);
     }
 }

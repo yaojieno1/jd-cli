@@ -58,6 +58,30 @@ public final class JavaDecompilerConstants {
      */
     public static final int JAR_SUFFIX_LEN = JAR_SUFFIX.length();
     /**
+     * Filename suffix for compiled jars.
+     */
+    public static final String ZIP_SUFFIX = ".zip";
+    /**
+     * Length of {@link #JAR_SUFFIX}.
+     */
+    public static final int ZIP_SUFFIX_LEN = ZIP_SUFFIX.length();
+    /**
+     * Filename suffix for compiled jars.
+     */
+    public static final String WAR_SUFFIX = ".war";
+    /**
+     * Length of {@link #JAR_SUFFIX}.
+     */
+    public static final int WAR_SUFFIX_LEN = WAR_SUFFIX.length();
+    /**
+     * Filename suffix for compiled jars.
+     */
+    public static final String EAR_SUFFIX = ".ear";
+    /**
+     * Length of {@link #JAR_SUFFIX}.
+     */
+    public static final int EAR_SUFFIX_LEN = EAR_SUFFIX.length();
+    /**
      * Filename suffix for java source files.
      */
     public static final String JAVA_SUFFIX = ".java";

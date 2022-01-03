@@ -108,7 +108,7 @@ public class ZipFileInput extends AbstractFileJDInput {
                     if (IOUtils.isClassFile(entryName)) {
                         LOGGER.debug("Caching {}", entryName);
                         processClass(zis, cachedLoader, entryName);
-                    } else if (IOUtils.isJarFile(entryName)) {
+                    } else if (isProcessInnerJar(options, entryName)) {
                         LOGGER.debug("Caching {}", entryName);
                         processInnerJar(javaDecompiler,
                                 zis,
@@ -129,7 +129,7 @@ public class ZipFileInput extends AbstractFileJDInput {
         Stream<String> classNamesStream = options.isParallelProcessingAllowed()
                 ? cachedLoader.getClassNames().parallelStream()
                 : cachedLoader.getClassNames().stream();
-        classNamesStream.filter(s -> !IOUtils.isInnerClass(s)).map(s -> IOUtils.cutClassSuffix(s)).forEach(name -> {
+        classNamesStream.filter(s -> !IOUtils.isInnerClass(s)).map(IOUtils::cutClassSuffix).forEach(name -> {
             try {
                 jdOutput.processClass(name, javaDecompiler.decompileClass(cachedLoader, name));
             } catch (Exception e) {
@@ -137,6 +137,15 @@ public class ZipFileInput extends AbstractFileJDInput {
             }
         });
         jdOutput.commit();
+    }
+
+
+    private boolean isProcessInnerJar(DecompilerOptions options, String entryName) {
+        return options.isDecompileInnerJar()
+                && (IOUtils.isJarFile(entryName)
+                || IOUtils.isZipFile(entryName)
+                || IOUtils.isWarFile(entryName)
+                || IOUtils.isEarFile(entryName));
     }
 
     private void processClass(ZipInputStream zis, CachedLoader cachedLoader, String entryName) {
@@ -149,8 +158,8 @@ public class ZipFileInput extends AbstractFileJDInput {
 
     private String getInnerDir(JDOutput jdOutput, String entryName) {
         return ((jdOutput.getTargetDir() == null)
-                    ? ""
-                    : jdOutput.getTargetDir().getPath() + File.separator)
+                ? ""
+                : jdOutput.getTargetDir().getPath() + File.separator)
                 + entryName;
     }
 

@@ -50,6 +50,11 @@ public class JavaDecompilerTest {
         public boolean isParallelProcessingAllowed() {
             return true;
         }
+
+        @Override
+        public boolean isDecompileInnerJar() {
+            return false;
+        }
     };
 
     /**

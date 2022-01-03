@@ -80,6 +80,10 @@ public class CLIArguments implements DecompilerOptions {
             "RegExp pattern which the to-be-decompiled file has to match. Not matching entries are skipped.")
     private final String pattern = null;
 
+    @Parameter(names = { "--inner", "-in" }, description =
+            "Decompiler inner jars(, wars, ears, and etc)")
+    private boolean decompileInnerJar;
+
     public List<String> getFiles() {
         return files;
     }
@@ -135,5 +139,11 @@ public class CLIArguments implements DecompilerOptions {
     @Override
     public boolean isParallelProcessingAllowed() {
         return ! serialProcessing;
+    }
+
+    @Override
+    public boolean isDecompileInnerJar() {
+        decompileInnerJar = true;
+        return decompileInnerJar;
     }
 }
