@@ -32,6 +32,7 @@ public abstract class AbstractFileJDInput implements JDInput {
 
     protected final File file;
     private final String pattern;
+    private final String nonPattern;
 
     /**
      * Constructor based on an existing file path.
@@ -44,8 +45,13 @@ public abstract class AbstractFileJDInput implements JDInput {
     }
 
     public AbstractFileJDInput(String filePath, String pattern) throws IllegalArgumentException {
+        this(filePath, pattern, null);
+    }
+
+    public AbstractFileJDInput(String filePath, String pattern, String nonPattern) throws IllegalArgumentException {
         LOGGER.trace("Creating JDInput instance for file {} and pattern {}", filePath, pattern);
-        this.pattern = pattern == null ? pattern : (".*" + pattern + ".*");
+        this.pattern = pattern == null ? null : (".*" + pattern + ".*");
+        this.nonPattern = nonPattern == null ? null : (".*" + nonPattern + ".*");
         file = new File(filePath);
         if (!file.exists()) {
             throw new IllegalArgumentException("Path doesn't denote an existing file.");
@@ -57,6 +63,9 @@ public abstract class AbstractFileJDInput implements JDInput {
      */
     protected boolean skipThePath(String path) {
         boolean skip = pattern != null && path != null && !path.matches(pattern);
+        if (!skip) {
+            skip = nonPattern != null && path != null && path.matches(nonPattern);
+        }
         if (skip) {
             LOGGER.debug("Skipping the path {} as it doesn't match the pattern {}", path, pattern);
         }

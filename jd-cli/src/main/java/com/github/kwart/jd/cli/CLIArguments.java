@@ -80,6 +80,10 @@ public class CLIArguments implements DecompilerOptions {
             "RegExp pattern which the to-be-decompiled file has to match. Not matching entries are skipped.")
     private final String pattern = null;
 
+    @Parameter(names = { "--non-pattern", "-np" }, description =
+            "RegExp pattern which the NOT-decompiled file has to match. MATCHING entries are SKIPPED.")
+    private final String nonPattern = null;
+
     @Parameter(names = { "--inner", "-in" }, description =
             "Decompiler inner jars(, wars, ears, and etc)")
     private boolean decompileInnerJar;
@@ -130,6 +134,10 @@ public class CLIArguments implements DecompilerOptions {
 
     public String getPattern() {
         return pattern;
+    }
+
+    public String getNonPattern() {
+        return nonPattern;
     }
 
     public boolean isOutputPluginSpecified() {

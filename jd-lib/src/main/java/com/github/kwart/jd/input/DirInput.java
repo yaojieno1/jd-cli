@@ -39,7 +39,11 @@ public class DirInput extends AbstractFileJDInput {
     private final FileLoader fileLoader;
 
     public DirInput(String path, String pattern) throws IllegalArgumentException {
-        super(path, pattern);
+        this(path, pattern, null);
+    }
+
+    public DirInput(String path, String pattern, String nonPattern) throws IllegalArgumentException {
+        super(path, pattern, nonPattern);
         if (!file.isDirectory()) {
             throw new IllegalArgumentException("Path doesn't denote a directory.");
         }

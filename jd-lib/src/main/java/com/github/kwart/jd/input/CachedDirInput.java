@@ -48,7 +48,11 @@ public class CachedDirInput extends AbstractFileJDInput {
     private static final Logger LOGGER = LoggerFactory.getLogger(CachedDirInput.class);
 
     public CachedDirInput(String path, String pattern) throws IllegalArgumentException {
-        super(path, pattern);
+        this(path, pattern, null);
+    }
+
+    public CachedDirInput(String path, String pattern, String nonPattern) throws IllegalArgumentException {
+        super(path, pattern, nonPattern);
         if (!file.isDirectory()) {
             throw new IllegalArgumentException("Path doesn't denote a directory.");
         }

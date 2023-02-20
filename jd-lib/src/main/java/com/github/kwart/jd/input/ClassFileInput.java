@@ -34,13 +34,16 @@ public class ClassFileInput extends AbstractFileJDInput {
     private static final Logger LOGGER = LoggerFactory.getLogger(ClassFileInput.class);
 
     public ClassFileInput(String path) {
-        super(path);
+        this(path, null);
     }
 
     public ClassFileInput(String filePath, String pattern) throws IllegalArgumentException {
-        super(filePath, pattern);
+        this(filePath, pattern, null);
     }
 
+    public ClassFileInput(String filePath, String pattern, String nonPattern) throws IllegalArgumentException {
+        super(filePath, pattern, nonPattern);
+    }
     /*
      * (non-Javadoc)
      *

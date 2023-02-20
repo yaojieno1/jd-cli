@@ -47,14 +47,18 @@ public class ZipFileInput extends AbstractFileJDInput {
      * Constructor.
      */
     public ZipFileInput(String path) {
-        super(path);
+        this(path, null);
     }
 
     /**
      * Constructor.
      */
     public ZipFileInput(String filePath, String pattern) throws IllegalArgumentException {
-        super(filePath, pattern);
+        this(filePath, pattern, null);
+    }
+
+    public ZipFileInput(String filePath, String pattern, String nonPattern) throws IllegalArgumentException {
+        super(filePath, pattern, nonPattern);
     }
 
     /*
