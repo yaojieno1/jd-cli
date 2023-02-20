@@ -10,3 +10,4 @@ target
 /jd-cli-*.zip
 /jd-cli-*.tar.gz
 .idea/
+test/
