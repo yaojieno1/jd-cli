@@ -8,7 +8,7 @@
     </parent>
 
     <artifactId>jd-lib</artifactId>
-  <version>1.4.0-SNAPSHOT</version>
+    <version>1.4.0-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>${project.artifactId}</name>
@@ -25,6 +25,8 @@
             <groupId>org.jd</groupId>
             <artifactId>jd-core</artifactId>
             <version>${jd.version}</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/../jd-core/jd-core-1.1.4.jar</systemPath>
         </dependency>
 
         <dependency>

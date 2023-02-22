@@ -17,6 +17,19 @@
     <build>
         <finalName>${project.name}</finalName>
 
+        <resources>
+            <resource>
+                <directory>${project.basedir}/../jd-core</directory>
+                <includes>
+                    <include>**/*.class</include>
+                    <include>**/*.xml</include>
+                    <include>**/*.yml</include>
+                    <include>**/*.properties</include>
+                    <include>**/*.ini</include>
+                </includes>
+            </resource>
+        </resources>
+
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
