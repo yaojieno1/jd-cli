@@ -90,8 +90,6 @@ public final class Main {
             System.exit(1);
         }
 
-        JDOutput outputPlugin = initOutput(cliArguments);
-
         final JavaDecompiler javaDecompiler = new JavaDecompiler(cliArguments);
 
         boolean decompiled = false;
@@ -106,6 +104,7 @@ public final class Main {
             }
 
             if (file.exists()) {
+                JDOutput outputPlugin = initOutput(cliArguments, path);
                 try {
                     InputOutputPair inOut = getInOutPlugins(file, outputPlugin, cliArguments.getPattern(),
                             cliArguments.getNonPattern(),
@@ -154,11 +153,11 @@ public final class Main {
         return jCmd;
     }
 
-    private static JDOutput initOutput(final CLIArguments cliArguments) {
+    private static JDOutput initOutput(final CLIArguments cliArguments, String path) {
         JDOutput outputPlugin = null;
 
+        List<JDOutput> outPlugins = new ArrayList<JDOutput>();
         if (cliArguments.isOutputPluginSpecified()) {
-            List<JDOutput> outPlugins = new ArrayList<JDOutput>();
             if (cliArguments.isConsoleOut()) {
                 outPlugins.add(new PrintStreamOutput(System.out));
             }
@@ -190,6 +189,13 @@ public final class Main {
                 outputPlugin = outPlugins.get(0);
             } else if (outPlugins.size() > 1) {
                 outputPlugin = new MultiOutput(outPlugins);
+            }
+        } else {
+            try {
+                File dir = new File(path + ".src");
+                outputPlugin = new DirOutput(dir);
+            } catch (Exception e) {
+                LOGGER.warn("Unable to create the directory output", e);
             }
         }
         return outputPlugin;
