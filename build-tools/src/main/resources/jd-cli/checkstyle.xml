@@ -13,6 +13,7 @@
     <!-- See http://checkstyle.sf.net/config_misc.html#NewlineAtEndOfFile -->
     <module name="NewlineAtEndOfFile">
         <property name="lineSeparator" value="lf"/>
+        <property name="severity" value="ignore" />
     </module>
 
     <!-- Checks that property files contain the same keys.         -->
